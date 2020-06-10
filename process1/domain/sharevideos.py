@@ -52,6 +52,8 @@ def sharevideos_setting(link) :
                 try:
                     emb = i.get("src")
                     if keyword in emb:
+                        emb='https://share-videos.se/auto/video/' + emb.split('/')[5].stripe()
+
                         sharevideos_list.append(emb)
                 except Exception as e:
                     print(e)

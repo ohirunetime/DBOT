@@ -30,7 +30,7 @@ for i in range(0, page):
 
         print(title, "\n", image, "\n", link)
 
-        file_name = "C:/Users/shinnosuke/Desktop/SODIMAGE/" + actress + str(count)+'.jpg'
+        file_name = "C:/Users/shinnosuke/Desktop/SODIMAGE/" + actress +'/'+ str(count)+'.jpg'
 
         response = requests.get(image,stream=True)
 
