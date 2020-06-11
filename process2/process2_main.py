@@ -7,9 +7,12 @@ config = configparser.ConfigParser()
 config.read('../setting.ini')
 section = 'development'
 proxies = config.get(section, 'proxies')
+
 LocalDatabaseURI = config.get(section, 'LocalDatabaseURI')
+
+herokuURI = config.get(section, 'herokuURI')
+
 print(proxies)
-print(LocalDatabaseURI)
 
 
 kensaku = input("女優名を入力 : ")
@@ -17,14 +20,14 @@ kensaku = input("女優名を入力 : ")
 
 def main():
     rows = get_process1()
-    domain_check(rows, proxies, LocalDatabaseURI)
+    domain_check(rows, proxies, herokuURI)
 
 
 def get_process1():
     conn = psycopg2.connect(LocalDatabaseURI)
     try:
         cur = conn.cursor()
-        sql = 'select distinct(link) , embedlink , domain , actress from process1 where actress = %s limit 100 '
+        sql = 'select distinct(link) , embedlink , domain , actress from process1 where actress = %s '
         cur.execute(sql, (kensaku,))
         rows = cur.fetchall()
         print(rows)

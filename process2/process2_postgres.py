@@ -2,15 +2,15 @@ import psycopg2
 import datetime
 
 
-def process2_database(link, embedlink, domain, actress, status, LocalDatabaseURI):
+def process2_database(link, embedlink, domain, actress, status, herokuURI):
     try:
 
         date = datetime.date.today()
 
-        conn = psycopg2.connect(LocalDatabaseURI)
+        conn = psycopg2.connect(herokuURI)
         cur = conn.cursor()
 
-        cur.execute('insert into copy_link (domain,link,embedlink,actress,status,create_date)\
+        cur.execute('insert into copy_content (domain,link,embedlink,actress,status,create_date)\
         values (%s,%s,%s,%s,%s,%s)', (domain, link, embedlink, actress, status, date))
         conn.commit()
         cur.close()

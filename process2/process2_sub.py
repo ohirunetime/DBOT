@@ -12,7 +12,7 @@ from domain_status.spankbang import spankbang_status
 from process2_postgres import process2_database
 
 
-def domain_check(rows, proxies, LocalDatabaseURI):
+def domain_check(rows, proxies, herokuURI):
     for row in rows:
         link = row[0]
         embedlink = row[1]
@@ -55,4 +55,4 @@ def domain_check(rows, proxies, LocalDatabaseURI):
             print(status, link, embedlink, domain, actress)
 
         process2_database(link, embedlink, domain, actress,
-                          status, LocalDatabaseURI)
+                          status, herokuURI)

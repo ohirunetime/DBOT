@@ -1,10 +1,10 @@
-create table copy_link(
+create table copy_content(
 id  serial not null,
 domain text,
 link text,
 embedlink text,
 actress text,
-status text default 'exist'
-update_date text,
+status text,
+create_date text,
 primary key(id)
 );

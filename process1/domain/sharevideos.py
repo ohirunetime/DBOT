@@ -52,7 +52,7 @@ def sharevideos_setting(link) :
                 try:
                     emb = i.get("src")
                     if keyword in emb:
-                        emb='https://share-videos.se/auto/video/' + emb.split('/')[5].stripe()
+                        emb='https://share-videos.se/auto/video/' + emb.split('/')[5]
 
                         sharevideos_list.append(emb)
                 except Exception as e:
@@ -80,25 +80,15 @@ def sharevideos_bs4(sharevideos_link,driver) :
 
 
     try:
-        # chrome_option = webdriver.ChromeOptions()
-        # driver = webdriver.Chrome(executable_path='../chromedriver.exe')
-
-        driver.get(sharevideos_link)
-        time.sleep(3)
-
-        html = driver.page_source.encode('utf-8')
-        # driver.close()
-        # driver.quit()
-
-        soup = BeautifulSoup(html, "html.parser")
-        soup2=soup.select_one("#video_tag")
-        link_all=soup2.find_all('a',href=True,text=True)
 
         get_link=[]
-        for i in link_all :
-            get_link.append(i.get("href"))
+        driver.get(sharevideos_link)
+        link_all = driver.find_elements_by_css_selector("#video_tag li a")
 
-        video_url=get_link[-1]
+        for link in link_all :
+            get_link.append(link.get_attribute("href"))
+        video_url  = get_link[-1]
+
 
     except Exception as e:
         video_url=[]

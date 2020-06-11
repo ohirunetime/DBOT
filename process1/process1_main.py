@@ -2,19 +2,26 @@ import configparser
 from eroterest import get_articles, get_eroblog
 from eroblog import domain_judge
 from selenium import webdriver
-
+from selenium.webdriver.chrome.options import Options
 
 
 config = configparser.ConfigParser()
 config.read('../setting.ini')
 section = 'development'
 proxies = config.get(section, 'proxies')
+proxy_host = config.get(section, 'proxy_host')
+proxy_port = config.get(section, 'proxy_port')
 LocalDatabaseURI = config.get(section, 'LocalDatabaseURI')
+
 print(proxies)
 
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--proxy-server=%s' % proxy_host + ":" + proxy_port)
+chrome_options.add_argument('--ignore-certificate-errors')
+chrome_options.add_argument('--ignore-ssl-errors')
 
-chrome_option = webdriver.ChromeOptions()
-driver = webdriver.Chrome(executable_path='../chromedriver.exe')
+driver = webdriver.Chrome(executable_path='../chromedriver.exe',options=chrome_options)
+driver.implicitly_wait(10)
 
 
 def main():
@@ -32,7 +39,7 @@ def main():
         try:
             article_list = get_articles(current_page, proxies)
             eroblog_list = get_eroblog(article_list, proxies)
-            domain_judge(eroblog_list, actress,LocalDatabaseURI,driver)
+            domain_judge(eroblog_list, actress, LocalDatabaseURI, driver)
 
         except Exception as e:
             print(e)
@@ -48,7 +55,7 @@ def init():
     actress = str(input("女優名を入力してください"))
     start_url = input("URLを入力してください")
     finish_page = int(input("finish_pageを入力してください"))
-    return start_url, finish_page , actress
+    return start_url, finish_page, actress
 
 
 main()
