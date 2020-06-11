@@ -9,8 +9,10 @@ from domain_status.redtube import redtube_status
 from domain_status.youporn import youporn_status
 from domain_status.spankbang import spankbang_status
 
+from process2_postgres import process2_database
 
-def domain_check(rows, proxies):
+
+def domain_check(rows, proxies, LocalDatabaseURI):
     for row in rows:
         link = row[0]
         embedlink = row[1]
@@ -23,7 +25,7 @@ def domain_check(rows, proxies):
 
         elif domain == 'tube8':
 
-            status = tube8_status(link, proxies)
+            status, link, embedlink = tube8_status(link, proxies)
 
         elif domain == 'extremetube':
 
@@ -50,4 +52,7 @@ def domain_check(rows, proxies):
 
         if status == 'alive':
 
-            print(status,link, embedlink, domain, actress)
+            print(status, link, embedlink, domain, actress)
+
+        process2_database(link, embedlink, domain, actress,
+                          status, LocalDatabaseURI)

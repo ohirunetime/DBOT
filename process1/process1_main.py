@@ -45,12 +45,9 @@ def main():
 
 
 def init():
-    print("女優名を入力してください")
-    actress = str(input())
-    print("URLを入力してください")
-    start_url = input()
-    print("finish_pageを入力してください")
-    finish_page = int(input())
+    actress = str(input("女優名を入力してください"))
+    start_url = input("URLを入力してください")
+    finish_page = int(input("finish_pageを入力してください"))
     return start_url, finish_page , actress
 
 

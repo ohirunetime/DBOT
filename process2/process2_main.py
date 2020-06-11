@@ -12,19 +12,19 @@ print(proxies)
 print(LocalDatabaseURI)
 
 
-kensaku = input()
+kensaku = input("女優名を入力 : ")
 
 
 def main():
     rows = get_process1()
-    domain_check(rows, proxies)
+    domain_check(rows, proxies, LocalDatabaseURI)
 
 
 def get_process1():
     conn = psycopg2.connect(LocalDatabaseURI)
     try:
         cur = conn.cursor()
-        sql = 'select link , embedlink , domain , actress from process1 where actress = %s limit 100 '
+        sql = 'select distinct(link) , embedlink , domain , actress from process1 where actress = %s limit 100 '
         cur.execute(sql, (kensaku,))
         rows = cur.fetchall()
         print(rows)

@@ -24,6 +24,3 @@ def redtube_status(link, proxies):
         print(e)
 
     return status
-
-
-# tube8_status('https://www.tube8.com/amateur/en12775/58680ffege271/')
