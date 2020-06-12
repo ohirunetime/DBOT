@@ -43,7 +43,17 @@ def extremetube_finishing(extremetube_list):
     domain_link=[]
 
     for link in extremetube_list:
-        viewkey = link.split('/')[4].strip()
+        viewkey = link.split('/')[4]
+
+        try:
+            viewkey = viewkey.split('&')[0]
+            viewkey = viewkey.split('?')[0]
+        except Exception as e:
+            pass
+
+        viewkey=viewkey.strip()
+
+
 
         link = "https://www.extremetube.com/video/" + viewkey
         embedlink = "https://www.extremetube.com/embed/" + viewkey

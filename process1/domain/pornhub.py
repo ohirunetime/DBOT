@@ -49,10 +49,20 @@ def pornhub_finishing(pornhub_list):
     for link in pornhub_list:
 
         if embedKeyword in link:
-            viewkey = link.split('/')[-1].strip()
+            viewkey = link.split('/')[-1]
 
         else:
-            viewkey = link.split('=')[-1].strip()
+            viewkey = link.split('=')[-1]
+
+        try:
+            viewkey = viewkey.split('&')[0]
+            viewkey = viewkey.split('=')[1]
+        except Exception as e:
+            pass
+
+        viewkey = viewkey.strip()
+
+
 
         link = "https://pornhub.com/view_video.php?viewkey=" + viewkey
         embedlink = "https://pornhub.com/embed/" + viewkey
