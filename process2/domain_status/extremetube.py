@@ -5,7 +5,7 @@ headers = {
      AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"}
 
 
-def extremetube_status(link, proxies):
+def extremetube_status(link,proxies):
     try:
         response = requests.get(
             link,
@@ -14,7 +14,10 @@ def extremetube_status(link, proxies):
 
         # response = requests.get(link,headers=headers)
 
-        if response.status_code == 404:
+        soup = BeautifulSoup(response.text, 'html.parser')
+        removed = soup.select("div.deleted-video-msg")
+
+        if removed or response.status_code == 404:
             status = 'dead'
         else:
             status = 'alive'
@@ -23,7 +26,8 @@ def extremetube_status(link, proxies):
         status = 'dead'
         print(e)
 
+
     return status
 
 
-# extremetube_status('https://www.extremetube.com/video/zk6nayft9272-42289161')
+# extremetube_status('https://www.extremetube.com/video/k417honjo-0000012-43113361')

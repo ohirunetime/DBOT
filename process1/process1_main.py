@@ -21,7 +21,7 @@ chrome_options.add_argument('--ignore-certificate-errors')
 chrome_options.add_argument('--ignore-ssl-errors')
 
 driver = webdriver.Chrome(executable_path='../chromedriver.exe',options=chrome_options)
-driver.implicitly_wait(10)
+driver.implicitly_wait(20)
 
 
 def main():

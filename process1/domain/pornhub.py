@@ -55,6 +55,7 @@ def pornhub_finishing(pornhub_list):
             viewkey = link.split('=')[-1]
 
         try:
+            viewkey = viewkey.split('#')[0]
             viewkey = viewkey.split('&')[0]
             viewkey = viewkey.split('=')[1]
         except Exception as e:
