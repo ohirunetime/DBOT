@@ -22,13 +22,20 @@ def pornhub_status(link, proxies):
         else:
             status = 'alive'
 
-        # print(status)
+        viewCountBox = soup.select_one("span.count")
+
+        if viewCountBox:
+            viewCount = viewCountBox.text
+
+        else:
+            viewCount = None
 
     except Exception as e:
         status = 'dead'
+        viewCount = None
         print(e)
 
-    return status
+    return status, viewCount
 
 
 # pornhub_status('https://jp.pornhub.com/view_video.php?viewkey=ph5eb6a57e9a9fc')

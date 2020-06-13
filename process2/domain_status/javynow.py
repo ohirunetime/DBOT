@@ -26,7 +26,9 @@ def javynow_status(link, proxies):
         status = 'dead'
         print(e)
 
-    return status
+    viewCount=None
+
+    return status,viewCount
 
 
 # javynow_status('https://javynow.com/cushion/358425herhr65/')

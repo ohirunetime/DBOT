@@ -22,13 +22,18 @@ def youporn_status(link, proxies):
         else:
             status = 'alive'
 
-        print(status)
+        viewCountBox = soup.select_one("span.infoValue")
+        if viewCountBox:
+            viewCount = viewCountBox.text
+        else:
+            viewCount = None
 
     except Exception as e:
         status = 'dead'
+        viewCount = None
         print(e)
 
-    return status
+    return status, viewCount
 
 
 # youporn_status('https://www.youporn.com/watch/1537few0975')

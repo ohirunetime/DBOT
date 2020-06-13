@@ -18,6 +18,7 @@ def tube8_status(link,proxies):
         category = link.split('/')[3]
         category2 = link.split('/')[4]
         tube8_id  = link.split('/')[5]
+        
         embedlink='https://www.tube8.com/embed/'+category+'/'+category2+'/'+tube8_id+'/'
 
         if response.status_code == 404:
@@ -25,12 +26,20 @@ def tube8_status(link,proxies):
         else:
             status = 'alive'
 
+        soup = BeautifulSoup(response.text, 'html.parser')
+        viewCountBox = soup.select("div.stats dl dd")
+        if viewCountBox :
+            viewCount = viewCountBox[-1].text
+        else :
+            viewCount=None
+
 
     except Exception as e:
         status = 'dead'
         link = ''
         embedlink=''
+        viewCount=None
         print(e)
 
 
-    return status,link,embedlink
+    return status,link,embedlink,viewCount

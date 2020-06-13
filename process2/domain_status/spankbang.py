@@ -12,8 +12,6 @@ def spankbang_status(link, proxies):
             proxies={"http": proxies, "https": proxies},
             headers=headers)
 
-        # response = requests.get(link,headers=headers)
-
         soup = BeautifulSoup(response.text, 'html.parser')
         removed = soup.select_one("div.video_removed_page")
 
@@ -22,11 +20,17 @@ def spankbang_status(link, proxies):
         else:
             status = 'alive'
 
+        viewCountBox = soup.select_one("span.i-plays")
+        if viewCountBox:
+            viewCount = viewCountBox.text
+            viewCount = viewCount.split(" ")[0]
+            viewCount = viewCount.strip()
+        else:
+            viewCount = None
+
     except Exception as e:
         status = 'dead'
+        viewCount = None
         print(e)
 
-    return status
-
-
-# spankbang_status('https://jp.spankbang.com/42667/video/teen+escort')
+    return status, viewCount

@@ -21,38 +21,39 @@ def domain_check(rows, proxies, herokuURI):
 
         if domain == 'pornhub':
 
-            status = pornhub_status(link, proxies)
+            status, viewCount = pornhub_status(link, proxies)
 
         elif domain == 'tube8':
 
-            status, link, embedlink = tube8_status(link, proxies)
+            status, link, embedlink, viewCount = tube8_status(link, proxies)
 
         elif domain == 'extremetube':
 
-            status = extremetube_status(link, proxies)
+            status, viewCount = extremetube_status(link, proxies)
 
         elif domain == 'youporn':
 
-            status = youporn_status(link, proxies)
+            status, viewCount = youporn_status(link, proxies)
 
         elif domain == 'redtube':
 
-            status = redtube_status(link, proxies)
+            status, viewCount = redtube_status(link)
 
         elif domain == 'javynow':
 
-            status = javynow_status(link, proxies)
+            status, viewCount = javynow_status(link, proxies)
 
         elif domain in 'spankbang':
 
-            status = spankbang_status(link, proxies)
+            status, viewCount = spankbang_status(link, proxies)
 
         else:
             status = 'dead'
+            viewCount = None
 
         if status == 'alive':
 
-            print(status, link, embedlink, domain, actress)
+            print(status, link, embedlink, domain, actress, viewCount)
 
         process2_database(link, embedlink, domain, actress,
-                          status, herokuURI)
+                          status, viewCount, herokuURI)

@@ -22,12 +22,19 @@ def extremetube_status(link,proxies):
         else:
             status = 'alive'
 
+        viewCountBox = soup.select("div.ibLine1 strong")
+        if viewCountBox:
+            viewCount = viewCountBox[1].text
+        else:
+            viewCount = None
+
     except Exception as e:
         status = 'dead'
+        viewCount=None
         print(e)
 
 
-    return status
+    return status , viewCount
 
 
 # extremetube_status('https://www.extremetube.com/video/k417honjo-0000012-43113361')
