@@ -25,6 +25,7 @@ def youporn_status(link, proxies):
         viewCountBox = soup.select_one("span.infoValue")
         if viewCountBox:
             viewCount = viewCountBox.text
+            viewCount = viewCount.strip()
         else:
             viewCount = None
 

@@ -11,7 +11,7 @@ def process2_database(link, embedlink, domain, actress, status, viewCount, herok
         cur = conn.cursor()
 
         cur.execute('insert into copy_content (domain,link,embedlink,actress,status,viewCount,create_date)\
-        values (%s,%s,%s,%s,%s,%s,%s)', (domain, link, embedlink, actress, status, , viewCount, date))
+        values (%s,%s,%s,%s,%s,%s,%s)', (domain, link, embedlink, actress, status, viewCount, date))
         conn.commit()
         cur.close()
         conn.close()

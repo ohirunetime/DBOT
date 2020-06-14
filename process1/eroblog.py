@@ -9,6 +9,8 @@ from domain.redtube import redtube_crawl
 from domain.youporn import youporn_crawl
 from domain.spankbang import spankbang_crawl
 from domain.sharevideos import sharevideos_crawl
+from domain.xvideos import xvideos_crawl
+
 
 from process1_postgres import InsertDatabase
 
@@ -16,7 +18,7 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36"}
 
 
-def domain_judge(eroblog_list, actress, LocalDatabaseURI,driver):
+def domain_judge(eroblog_list, actress, LocalDatabaseURI, driver):
 
     for box in eroblog_list:
         link = box[0]
@@ -54,7 +56,10 @@ def domain_judge(eroblog_list, actress, LocalDatabaseURI,driver):
 
         elif domain == 'ShareVideos':
 
-            copy_content = sharevideos_crawl(link,driver)
+            copy_content = sharevideos_crawl(link, driver)
+
+        elif domain == 'xvideos':
+            copy_content = xvideos_crawl(link)
 
         else:
             copy_content = None

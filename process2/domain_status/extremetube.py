@@ -25,6 +25,7 @@ def extremetube_status(link,proxies):
         viewCountBox = soup.select("div.ibLine1 strong")
         if viewCountBox:
             viewCount = viewCountBox[1].text
+            viewCount = viewCount.strip()
         else:
             viewCount = None
 

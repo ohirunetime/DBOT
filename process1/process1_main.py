@@ -17,10 +17,12 @@ print(proxies)
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--proxy-server=%s' % proxy_host + ":" + proxy_port)
+
 chrome_options.add_argument('--ignore-certificate-errors')
 chrome_options.add_argument('--ignore-ssl-errors')
 
-driver = webdriver.Chrome(executable_path='../chromedriver.exe',options=chrome_options)
+driver = webdriver.Chrome(
+    executable_path='../chromedriver.exe', options=chrome_options)
 driver.implicitly_wait(20)
 
 
@@ -30,7 +32,7 @@ def main():
 
     count = 0
 
-    for i in range(1, finish_page):
+    for i in range(1, finish_page + 1):
 
         current_page = start_url + "&c=&page=" + str(i)
 

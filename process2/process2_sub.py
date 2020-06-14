@@ -8,6 +8,7 @@ from domain_status.javynow import javynow_status
 from domain_status.redtube import redtube_status
 from domain_status.youporn import youporn_status
 from domain_status.spankbang import spankbang_status
+from domain_status.xvideos import xvideos_status
 
 from process2_postgres import process2_database
 
@@ -46,6 +47,10 @@ def domain_check(rows, proxies, herokuURI):
         elif domain in 'spankbang':
 
             status, viewCount = spankbang_status(link, proxies)
+
+        elif domain in 'xvideos':
+
+            status, link, embedlink, viewCount = xvideos_status(link, proxies)
 
         else:
             status = 'dead'

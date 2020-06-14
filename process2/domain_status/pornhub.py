@@ -26,6 +26,7 @@ def pornhub_status(link, proxies):
 
         if viewCountBox:
             viewCount = viewCountBox.text
+            viewCount = viewCount.strip()
 
         else:
             viewCount = None
